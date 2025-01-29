@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+:root {
+  --font-family: "Poppins", system-ui;
+  --font-size: 16px;
+  --font-weight: normal;
+  --line-height: 1.5;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  line-height: var(--line-height);
+  // color: white;
+}
+
+@mixin font-normal {
+  font-family: "Poppins", system-ui;
+  font-size: 16px;
+  font-weight: normal;
+  line-height:1.2;
+}
+
+@mixin font-side-heading{
+  font-family: "Poppins", system-ui;
+  font-size: 1em;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+
+@mixin font-bold {
+  font-family: "Poppins", system-ui;
+  font-size: "20px";
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+@mixin profile-name{
+  font-family: "Poppins", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  font-size: 22px;
+}
+
+@mixin button-primary{
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+  color: white;
+}
+
+$themes: (
+  light: (
+    textColor: #000,
+    bg:  white,    //also used as text color many a times in pages groups
+    logo: rgb(5, 68, 150),
+    bgSoft: #faf7f7,
+    bgActive: rgb(217, 219, 226),
+    textColorSoft: #555,
+    border: lightgray,
+    button-primary-bg:#012e6b,
+    primary-color:#012e6b,
+    text-color:white,
+    primary-color-hover:#063a83,
+    text-color-blur:#666,
+    font-family: "Helvetica, sans-serif",
+  ),
+  dark: (
+    textColor: whitesmoke,
+    bg: #15202b,
+    logo: white,
+    bgSoft: #384049,
+    bgActive:	#192734,
+    textColorSoft: lightgray,
+    border: #444,
+    button-primary-bg:#5271ff,
+    primary-color:white,
+    text-color:"black",
+    primary-color-hover:white,
+    text-color-blur:#666,
+    font-family: "Helvetica, sans-serif",
+  // dark: (
+  //   textColor: whitesmoke,
+  //   bg: #222,
+  //   logo: white,
+  //   bgSoft: #333,
+  //   bgActive:#333,
+  //   textColorSoft: lightgray,
+  //   border: #444,
+  //   button-primary-bg:#5271ff,
+  //   primary-color:white,
+  //   text-color:"black",
+  //   primary-color-hover:white,
+  //   text-color-blur:#666,
+  //   font-family: "Helvetica, sans-serif",
+  ),
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 960px) {
+    @content;
+  }
+}
