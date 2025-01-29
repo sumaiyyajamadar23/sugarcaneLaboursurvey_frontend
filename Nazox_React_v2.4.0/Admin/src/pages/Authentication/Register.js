@@ -233,8 +233,10 @@ const Register = () => {
     lastName: "",
     dob: "",
     address: "",
-    district: "",
-    mobNumber: ""
+    mobNumber: "",
+    bloodGroup: "",
+    gender:"",
+    roleId:""
   });
   const [errors, setErrors] = useState({});
   const [err, setErr] = useState(null);
@@ -274,7 +276,7 @@ const Register = () => {
     }
     if (!inputs.dob) newErrors.dob = "Date of birth is required";
     if (!inputs.address) newErrors.address = "Address is required";
-    if (!inputs.district) newErrors.district = "District is required";
+    // if (!inputs.district) newErrors.district = "District is required";
     // if (!captchaToken) newErrors.captcha = "Please complete the CAPTCHA";
     if (!inputs.email && !inputs.mobNumber) {
       newErrors.email = "Either Email or Mobile Number is required";
@@ -310,15 +312,11 @@ const Register = () => {
         userFirstName: inputs.firstName,
         userLastName: inputs.lastName,
         userEmail: inputs.email,
-        userGender: "FEMALE",
-        userDateOfBirth: inputs.dob,
+        userGender: inputs.gender,
         userAddress: inputs.address,
-        userProfileImagePath: "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359554_1280.png",
-        userCoverProfileImagePath: "https://images.unsplash.com/photo-1528459584353-5297db1a9c01?q=80&w=1799&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         userPassword: inputs.password,
-        districtId: inputs.district,
         userMobileNumber: inputs.mobNumber,
-        userRole: "ROLE_USER",
+        userRole: inputs.roleId,
         isTermsAndConditionsAccepted: agreedToTerms
       });
       setSuccess(true);
@@ -379,7 +377,7 @@ const Register = () => {
     <div className="register">
       {contextHolder}
       <div className="card">
-        <div className="left">
+        {/* <div className="left">
           <div className="outer">
             <div className="middle">
               <div className="inner">
@@ -387,7 +385,7 @@ const Register = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="right">
         <div className="text-center">
              <div>
@@ -395,7 +393,7 @@ const Register = () => {
                 <img src={logodark} height="20" alt="logo" />
                 </Link>
              </div>                                              
-             <h4 className="font-size-30 mt-4">Register account</h4>
+             <h4 className="font-size-30 mt-3">Register account</h4>
              <p className="text-muted">Get your free UTS account now.</p>
         </div>                            
           <form>
@@ -440,7 +438,7 @@ const Register = () => {
               </div>
             </div>
             <div className="input-wrapper">
-              <div>
+              {/* <div>
                 <select
                   name="district"
                   value={inputs.district}
@@ -452,8 +450,17 @@ const Register = () => {
                       {district.districtName}
                     </option>
                   ))}
-                </select>
-                <span className="error">{errors.district}</span>
+                </select> */}
+                {/* <span className="error">{errors.district}</span> */}
+              {/* </div> */}
+              <div>
+                <input
+                  type="text"
+                  placeholder="Mobile Number"
+                  name="mobNumber"
+                  onChange={handleChange}
+                />
+                <span className="error">{errors.mobNumber}</span>
               </div>
               <div>
                 <input
@@ -475,7 +482,7 @@ const Register = () => {
                 />
                 <span className="error">{errors.password}</span>
               </div> */}
-              <div>
+              {/* <div>
                 <input
                   type="text"
                   placeholder="Mobile Number"
@@ -483,7 +490,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
                 <span className="error">{errors.mobNumber}</span>
-              </div>
+              </div> */}
             </div>
             {/* <div className="captcha-container">
               <ReCAPTCHA
@@ -492,6 +499,38 @@ const Register = () => {
               />
               <span className="error">{errors.captcha}</span>
             </div> */}
+             <div className="input-wrapper">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Blood Group"
+                  name="bloodGroup"
+                  onChange={handleChange}
+                />
+                <span className="error">{errors.bloodGroup}</span>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Role Id"
+                  name="roleId"
+                  onChange={handleChange}
+                />
+                <span className="error">{errors.roleId}</span>
+              </div>
+            </div>
+            <div className="input-wrapper">
+            <div>
+              <select name="gender" onChange={handleChange} value={inputs.gender}>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <span className="error">{errors.gender}</span>
+            </div>
+          </div>
+            
             <div className="terms-wrapper">
               <input type="checkbox" checked={agreedToTerms} onChange={() => setAgreedToTerms(!agreedToTerms)} />
               <span>
