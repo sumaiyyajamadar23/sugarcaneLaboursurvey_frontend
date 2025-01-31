@@ -18,7 +18,8 @@ import {
 } from "../../common/data";
 
 let users = [
-  { id: 1, username: 'admin', password: '123456', email: 'admin@themesdesign.in' }
+  { id: 1, username: 'admin', password: '12345', email: 'admin@themesdesign.in' },
+  { id: 1, username: 'admin', password: '1234', email: 'sumaiyya@gmail.com' }
 ];
 
 const fakeBackend = () => {
